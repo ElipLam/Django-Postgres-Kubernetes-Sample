@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Hero: {{ hero.hero_name }}</h1>
+
+<ul>
+    <li>
+        Id: {{hero.hero_id}}
+    </li>
+    <li>
+        Number of Win: {{hero.pro_win}}
+    </li>
+    <li>
+        Number of Pick: {{hero.pro_pick}}
+    </li>
+</ul>
+
+{% endblock content %}

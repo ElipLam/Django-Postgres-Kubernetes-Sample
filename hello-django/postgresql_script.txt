@@ -1,0 +1,14 @@
+CREATE TABLE public.hero (
+  hero_id INTEGER NOT NULL, 
+  hero_name character varying,
+  pro_Win INTEGER,
+  pro_pick INTEGER
+);
+
+CREATE TABLE public.player (
+  player_id REAL NOT NULL, 
+  rank_tier REAL,
+  win REAL,
+  lose REAL,
+  mmr_estimate REAL
+);

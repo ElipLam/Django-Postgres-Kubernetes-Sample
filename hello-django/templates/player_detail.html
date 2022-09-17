@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Player Id: {{player.player_id}}</h1>
+<ul>
+    <li>
+        Rank tier: {{player.rank_tier}}
+    </li>
+    <li>
+        Number of Win: {{player.win}}
+    </li>
+    <li>
+        Number of Lose: {{player.lose}}
+    </li>
+    <li>
+        MMR Estimate: {{player.mmr_estimate}}
+    </li>
+</ul>
+
+{% endblock content %}
