@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-container #
+  template:
+    metadata:
+      labels:
+        app: postgres-container
+        tier: backend
+    spec:
+      containers:
+        - name: postgres-container
+          image: postgres:14
+          # command: ["sleep"] 
+          # args: ["100"]
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+
+            - name: POSTGRES_DATABASE
+              value: dota2
+
+            - name: POSTGRES_ENGINE
+              value: django.db.backends.postgresql
+
+            # - name: POSTGRES_HOST
+            #   value: postgres-service #
+
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-volume-mount
+              mountPath: /var/lib/postgresql/data
+
+      volumes:
+        - name: postgres-volume-mount
+          persistentVolumeClaim:
+            claimName: postgres-pvc

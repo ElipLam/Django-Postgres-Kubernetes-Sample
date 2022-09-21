@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-deployment #
+  labels:
+    app: django-deployment #
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-container #
+  template:
+    metadata:
+      labels: 
+        app: django-container #
+    spec:
+      containers:
+        - name: django-container #
+          # image: eliplam/hello_django:0.0.1 #
+          image: eliplam/hello_django:only_postgres #
+          # command: ['/bin/bash']
+          args: ['-c', 'python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000']
+          # Just spin & wait forever
+          # command: [ "/bin/bash", "-c", "--" ]
+          # args: [ "while true; do sleep 30; done;" ]
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+
+            - name: POSTGRES_HOST
+              value: postgres-service
+            
+            - name: POSTGRES_DATABASE
+              value: dota2
+              
+            - name: POSTGRES_ENGINE
+              value: django.db.backends.postgresql
+          

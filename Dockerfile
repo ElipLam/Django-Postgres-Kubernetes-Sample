@@ -18,7 +18,7 @@ RUN python -m pip install --upgrade pip
 COPY /hello-django /project
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 
 VOLUME /project

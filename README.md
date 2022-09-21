@@ -76,6 +76,80 @@ psql -U postgres
 vao container postgres, sau do toi /usr/src/ chay script de khoi tao database.
 
 
+We need to provide the deployment name and app image location (include the full repository url for images hosted outside Docker hub).
+
+```console
+kubectl create deployment <project-name> --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+```
+
+```console
+kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+```
+
+To list your deployments use the get deployments command:
+
+```
+kubectl get deployments
+```
+
+echo -e "\n\n\n\e[92mStarting Proxy. After starting it will not output a response. Please click the first Terminal Tab\n"; 
+kubectl proxy
+
+
+On Kubernetes, configuration variables can be injected using ConfigMaps and Secrets.
+**Secrets** also store data in **base64**, while **ConfigMaps** store data in **plain text**.
+
+
+kubernetes get deployments
+
+```
+kubectl get deployments
+```
+
+kubernetes get services
+
+```
+kubectl get services
+```
+
+kubernetes delete deployment
+
+```
+kubectl delete deployments <name-deployment>
+```
+
+kubernetes delete service 
+
+```
+kubectl delete service <name-serice>
+```
+
+
+# Deploy Postgres 
+
+Data in PostgreSQL needs to be persisted for long term storage. The default location for storage in PostgreSQL is `/var/lib/postgresql/data`. However, Kubernetes pods are designed to have ephemeral storage, which means once a pod dies all the data within the pod is lost.
+
+To mitigate against this, Kubernetes has the concept of volumes. There are several volume options, but the recommended type for databases is the PersistentVolume subsystem.
+
+As a result, Kubernetes provides two API resources which are the `PersistentVolume` and `PersistentVolumeClaim`for setting volumes.
+
+echo -n "<string>" | base64
+
+Apply the files following:
+    postgres/volume.yaml
+    postgres/volume_claim.yaml
+    postgres/secrets.ymal
+    postgres/deployments.yaml
+    postgres/service.yaml
+
+Syntax: kubectl apply -f <filename.yaml>
+
+kubectl exec -it <pod-name> bin/bash
+
+in postgres container:
+sudo pg_createcluster 14 main
+/etc/postgresql/14/main
+sudo service postgresql restart
 Reference:
 
 https://docs.docker.com/samples/django/
