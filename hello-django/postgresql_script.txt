@@ -1,7 +1,9 @@
+CREATE DATABASE dota2;
+
 CREATE TABLE public.hero (
   hero_id INTEGER NOT NULL, 
   hero_name character varying,
-  pro_Win INTEGER,
+  pro_win INTEGER,
   pro_pick INTEGER
 );
 
@@ -12,3 +14,19 @@ CREATE TABLE public.player (
   lose REAL,
   mmr_estimate REAL
 );
+
+INSERT INTO hero (hero_id,hero_name,pro_win,pro_pick) 
+VALUES (1,'antimage',46,95),
+(2,'axe',20,46),
+(3,'bane',172,310),
+(4,'bloodseeker',127,261),
+(5,'crystal maiden',71,147);
+
+INSERT INTO player (player_id,rank_tier,win,lose,mmr_estimate) 
+VALUES (19813,65.0,3068,3024,3686.0),
+(24937,55.0,1102,1084,3565.0),
+(26952,80.0,3932,3792,5294.0),
+(30208,65.0,3318,3204,4636.0),
+(40380,75.0,4830,4551,4014.0),
+(42072,80.0,2020,2083,4096.0),
+(43407,75.0,5186,4834,4617.0);
