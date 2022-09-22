@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
+  name: postgres-deployment #
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-container #
+      app: postgres-container 
   template:
     metadata:
       labels:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: postgres-container
-          image: postgres:14
+          image: postgres:14 #
           # command: ["sleep"] 
           # args: ["100"]
           command: [ "/bin/bash", "-c", "--" ]

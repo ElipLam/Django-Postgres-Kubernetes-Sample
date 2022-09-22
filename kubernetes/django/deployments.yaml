@@ -18,7 +18,7 @@ spec:
         - name: django-container #
           # image: eliplam/hello_django:0.0.1 #
           image: eliplam/hello_django:only_postgres #
-          # command: ['/bin/bash']
+          command: ['/bin/bash']
           args: ['-c', 'python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000']
           # Just spin & wait forever
           # command: [ "/bin/bash", "-c", "--" ]
